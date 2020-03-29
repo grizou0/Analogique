@@ -4,10 +4,10 @@
 // Chan0  |1    16|VDD 3.3V
 // Chan1  |2    15|Vref 3.3V
 // Chan2  |3    14|AGND 0V
-// Chan3  |4    13|CLK
-// Chan4  |5    12|DOUT (MOSI Raspberry Pi)
-// Chan5  |6    11|DIN  (MISO Raspberry Pi)
-// Chan6  |7    10|CS
+// Chan3  |4    13|CLK  (SCLK 23 Raspberry Pi)
+// Chan4  |5    12|DOUT (MOSI 19 Raspberry Pi)
+// Chan5  |6    11|DIN  (MISO 21 Raspberry Pi)
+// Chan6  |7    10|CS   (Chip 26 Raspberry CE1)
 // Chan7  |8     9|GND
 
 #include <wiringPi.h>
@@ -15,15 +15,15 @@
 #include <stdlib.h>
 #define MOSI  12  // Physical 19 read
 #define MISO  13  //          21 Send 
-#define Clk   28  //          38
-#define CE    29 //           40
+#define Clk   14  //          23 SCLK
+#define CE    11 //           26 CE1
 
 void pulse()
 {
-digitalWrite(Clk,0);
-delay(10);
-digitalWrite(Clk,1);
-delay(10);
+digitalWrite(Clk,0); // Clk Down
+delay(2);
+digitalWrite(Clk,1); // Clk Up
+delay(2);
 }
 int main(void)
 {
